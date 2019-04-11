@@ -20,6 +20,7 @@ import Data.String.Here
 
 import Data.Binary.Put (runPut)
 import Data.Binary.Get (runGetOrFail)
+import Data.Semigroup
 
 import EVM
 import EVM.ABI
