@@ -1201,15 +1201,13 @@ replaceCode :: Addr -> ContractCode -> EVM ()
 replaceCode target newCode = do
   zoom (env . contracts . at target) $ do
     Just now <- get
-    case (view contractcode now) of
-      InitCode _ ->
-        put . Just $
-        initialContract newCode
-        & set storage (view storage now)
-        & set balance (view balance now)
-        & set nonce   (view nonce now)
-      RuntimeCode _ ->
-        error "internal error: can't replace code of deployed contract"
+    put . Just $
+     initialContract newCode
+     & set storage (view storage now)
+     & set balance (view balance now)
+     & set nonce   (view nonce now)
+     --RuntimeCode _ ->
+     --error "internal error: can't replace code of deployed contract"
 
 replaceCodeOfSelf :: ContractCode -> EVM ()
 replaceCodeOfSelf newCode = do
